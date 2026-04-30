@@ -1,0 +1,20 @@
+This file contains a numeric array in little-endian binary format.  Starting at byte offset 1024 is a binary header.  The first value:
+	Data format (8 characters)
+indicates how array elements are stored in the file. Short names and bit size indicate standard integer (uint8, uint16, etc.) or floating point (flt32, or flt64) data types.  Null characters (ASCII 0) are used on the right side as placeholders.
+
+The next two values: 
+	Data intercept (64-bit float)
+	Data slope (64-bit float)
+define linear mapping of stored integers (x) to array data (y).
+	y=intercept+slope*x
+Infinite slope indicates data mapping is *not* used.
+
+The next value and subsequent 3N values define the array size.
+	Dimensions N >= 2 (uint64)
+	Dimension 1 length (uint64)
+	Dimension 1 grid start (64-bit float)
+	Dimension 1 grid step (64-bit float)
+	...
+Array data is stored column wise immediately after the dimension N grid step.
+
+The remainder of the file holds optional text comments.

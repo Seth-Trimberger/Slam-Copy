@@ -1,0 +1,24 @@
+$ Lines that start with a "$" are comment lines.
+$
+$ Material, Density, C, S
+$
+Aluminum , 2.700, 5.385, 1.339
+Bromoform, 2.87, 1.5, 1.38
+Copper, 8.930, 3.970, 1.479
+Gallium, 6.078, 2.911, 1.481
+Gold, 19.4, 3.07, 1.54
+Iron, 7.85, 3.938, 1.587, 2.0 
+LiF, 2.640, 5.215, 1.351
+Magnesium, 1.776, 4.516, 1.256
+Molybdenum, 10.215, 5.122, 1.245
+PMMA, 1.186, 2.598, 1.516
+Pyrex, 2.23, 1.75, 1.53
+Sapphire, 3.985, 11.19, 1.0
+Silver, 10.5, 3.27, 1.57
+Tin, 7.287, 2.59, 1.49
+SS304, 7.926, 4.48, 1.51
+SS316, 7.96, 4.464, 1.544
+Tantalum, 16.680, 3.315, 1.300
+Tungsten, 19.256, 4.022, 1.260
+Zirconium, 6.506, 3.64, 1.11
+Quartz, 2.65, 6.36, 1.36

@@ -1,0 +1,9 @@
+This is an Institute for Shock Physics data file.  Information is stored
+using MATLAB's binary MAT format, which since late 2006 has been based on HDF5.
+In other words, *.isp files are essentially *.h5 files with minor modifications 
+to conventions set forth by Mathworks.  Variables of arbitrary type and size
+are assigned to separate datasets: /record1 is the first stored variable, 
+/record2 is the second stored variable, and so forth.  Each dataset is granted a
+"Name" attribute (for labelling purposes) that is *not* used in standard *.mat
+files.  Dataset names must be unique with a *.isp file and can be changed at 
+any time.

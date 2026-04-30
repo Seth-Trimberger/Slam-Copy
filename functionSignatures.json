@@ -1,0 +1,11 @@
+{
+    "_schemaVersion": "1.0.0",
+    "handy.compareFolders":
+    {
+        "inputs":
+        [
+            {"name":"folderA", "kind":"ordered", "type":["folder"], "purpose":"folder A"},
+            {"name":"folderB", "kind":"ordered", "type":["folder"], "purpose":"folder B"}
+        ]
+    }
+}

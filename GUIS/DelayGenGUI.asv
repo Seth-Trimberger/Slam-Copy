@@ -1,0 +1,152 @@
+ifunction DG535_GUI()
+
+import SLAM.Developer.ComponentBox
+
+cb = ComponentBox('hide');
+setFont(cb,'Consolas')
+setName(cb, 'DG535 Delay Generator Control');                      
+%setFont(cb, '', 12);
+
+h = addMessage(cb, 40, 1);
+h.Text = 'DG535 Digital Delay Generator';
+h.FontWeight = 'bold';
+h.FontSize = 14;
+
+newRow(cb);
+
+h = addMessage(cb, 40, 1);
+h.Text = 'Status: Not Connected';
+h.Tag = 'StatusMsg';
+
+newRow(cb);
+
+h = addButton(cb, 15);
+h.Text = 'Connect';
+h.Tag = 'ConnectBtn';
+h.ButtonPushedFcn = @connectDG535;
+
+h = addButton(cb, 15);
+h.Text = 'Disconnect';
+h.Tag = 'DisconnectBtn';
+h.Enable = 'off';
+h.ButtonPushedFcn = @disconnectDG535;
+
+newRow(cb);
+newRow(cb);
+
+h = addMessage(cb, 40, 1);
+h.Text = '=== Trigger Settings ===';
+h.FontWeight = 'bold';
+
+newRow(cb);
+
+h = addSpinner(cb, 25);
+h(1).Text = 'Trigger Rate (Hz):';
+h(2).Value = 1;
+h(2).Limits = [0.001 1000];
+h(2).Step = 1;
+h(2).Tag = 'TrigRate';
+h(2).ValueChangedFcn = @setTriggerRate;
+
+newRow(cb);
+
+h = addDropdown(cb, 25);
+h(1).Text = 'Trigger Mode:';
+h(2).Items = {'Internal', 'External Rising', 'External Falling', ...
+              'Single Shot', 'Burst'};
+h(2).Value = 'Internal';
+h(2).Tag = 'TrigMode';
+h(2).ValueChangedFcn = @setTriggerMode;
+
+newRow(cb);
+newRow(cb); 
+
+h = addMessage(cb, 40, 1);
+h.Text = '=== Delay Settings ===';
+h.FontWeight = 'bold';
+
+newRow(cb);
+
+h = addSpinner(cb, 25);
+h(1).Text = 'Channel A Delay (ns):';
+h(2).Value = 0;
+h(2).Limits = [0 10000];
+h(2).Step = 10;
+h(2).Tag = 'DelayA';
+h(2).ValueChangedFcn = @(src,~) setDelay('A', src.Value);
+
+newRow(cb);
+
+h = addSpinner(cb, 25);
+h(1).Text = 'Channel B Delay (ns):';
+h(2).Value = 100;
+h(2).Limits = [0 10000];
+h(2).Step = 10;
+h(2).Tag = 'DelayB';
+h(2).ValueChangedFcn = @(src,~) setDelay('B', src.Value);
+
+newRow(cb);
+
+h = addSpinner(cb, 25);
+h(1).Text = 'Channel C Delay (ns):';
+h(2).Value = 200;
+h(2).Limits = [0 10000];
+h(2).Step = 10;
+h(2).Tag = 'DelayC';
+h(2).ValueChangedFcn = @(src,~) setDelay('C', src.Value);
+
+newRow(cb);
+
+h = addSpinner(cb, 25);
+h(1).Text = 'Channel D Delay (ns):';
+h(2).Value = 300;
+h(2).Limits = [0 10000];
+h(2).Step = 10;
+h(2).Tag = 'DelayD';
+h(2).ValueChangedFcn = @(src,~) setDelay('D', src.Value);
+
+newRow(cb);
+newRow(cb);
+
+h = addMessage(cb, 40, 1);
+h.Text = '=== Quick Actions ===';
+h.FontWeight = 'bold';
+
+newRow(cb);
+
+h = addButton(cb, 15);
+h.Text = 'Reset Delays';
+h.Tag = 'ResetBtn';
+h.ButtonPushedFcn = @resetDelays;
+
+h = addButton(cb, 15);
+h.Text = 'Query Device';
+h.Tag = 'QueryBtn';
+h.ButtonPushedFcn = @queryDevice;
+
+newRow(cb);
+newRow(cb); % Extra space
+
+h = addTextarea(cb, 50, 6);
+h(1).Text = 'Activity Log:';
+h(2).Value = {'DG535 GUI initialized', 'Ready to connect'};
+h(2).Editable = 'off';
+h(2).Tag = 'ActivityLog';
+
+newRow(cb);
+
+h = addButton(cb, 10);
+h.Text = 'Close';
+h.ButtonPushedFcn = @closeGUI;
+
+fit(cb);
+locate(cb);
+show(cb);
+
+cb.Figure.UserData = struct('DG535', [], 'Connected', false);
+
+uiwait(cb.Figure);
+
+
+
+end
